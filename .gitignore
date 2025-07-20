@@ -1,0 +1,19 @@
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment
+.venv/
+
+# Ignore environment variables
+.env
+
+# Ignore IDE settings
+.vscode/
+.idea/
+
+# OS clutter
+.DS_Store
+Thumbs.db
