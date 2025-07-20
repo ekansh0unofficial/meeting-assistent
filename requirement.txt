@@ -6,6 +6,8 @@ requests
 torch
 torchaudio
 torchvision
+sentence-transformers
+dotenv
 streamlit           # For UI (planned)
 langchain           # For Q&A (upcoming)
 faiss-cpu           # For vector storage (upcoming)
