@@ -1,5 +1,4 @@
 import whisper 
-from pathlib import Path
 
 def transcribe_audio(audio_path: str) -> str:
     print(f"loading audio : {audio_path}")
