@@ -3,6 +3,7 @@ from app.summarizer import summarize_text
 from app.chunker import chunk_text
 from app.embedding import get_embedding
 from app.vector_store import build_faiss_index, search_index
+from app.llm import ask_question
 
 # Step 1: Transcription
 transcript = transcribe_audio("data/sample_meeting.mp3")
@@ -42,3 +43,7 @@ top_indices = search_index(index, query_embedding, top_k=3)
 print("\n🔍 TOP MATCHING CHUNKS:\n")
 for i in top_indices:
     print(f"→ {chunks[i]}")
+
+context ="\n".join([chunks[i] for i in top_indices])
+answer = ask_question(context , query_text)
+print(answer)
