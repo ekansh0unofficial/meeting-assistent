@@ -35,7 +35,7 @@ for chunk in chunks:
 index = build_faiss_index(embeddings)
 
 # Step 6: Query
-query_text = "project deadline"
+query_text = "what is the deadline of project?"
 query_embedding = get_embedding(query_text)
 top_indices = search_index(index, query_embedding, top_k=3)
 
