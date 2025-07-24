@@ -1,4 +1,4 @@
-from app.transcribe import record_and_transcribe
+from app.io.transcribe import record_and_transcribe
 
 if __name__ == "__main__":
     print("🧪 Starting live audio test...")

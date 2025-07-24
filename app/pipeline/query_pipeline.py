@@ -1,8 +1,8 @@
-from app.summarizer import summarize_text
-from app.chunker import chunk_text
-from app.embedding import get_embedding
-from app.vector_store import build_faiss_index , search_index
-from app.llm import ask_question
+from app.core.summarizer import summarize_text
+from app.core.chunker import chunk_text
+from app.core.embedding import get_embedding
+from app.core.vector_store import build_faiss_index , search_index
+from app.core.llm import ask_question
 
 def process_query(query:str , context : str , top_k: int = 3) -> str:
     summary = summarize_text(context)
