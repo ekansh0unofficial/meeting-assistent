@@ -11,7 +11,7 @@ def process_query(query:str , context : str , top_k: int = 3) -> str:
 
     embeddings = [get_embedding(chunk) for chunk in chunks]
 
-    faiss_index = build_faiss_index()
+    faiss_index = build_faiss_index(embeddings)
 
     query_embedding = get_embedding(query)
 
