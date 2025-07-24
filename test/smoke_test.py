@@ -29,14 +29,13 @@ embeddings = []
 for chunk in chunks:
     emb = get_embedding(chunk)
     embeddings.append(emb)
-    print(emb)
-    print("\n")
+
 
 # Step 5: FAISS Index Build
 index = build_faiss_index(embeddings)
 
 # Step 6: Query
-query_text = "what is the deadline of project?"
+query_text = "summarize project?"
 query_embedding = get_embedding(query_text)
 top_indices = search_index(index, query_embedding, top_k=3)
 
@@ -44,6 +43,7 @@ print("\n🔍 TOP MATCHING CHUNKS:\n")
 for i in top_indices:
     print(f"→ {chunks[i]}")
 
+print("\nLLM ANSWERS => query : summarize project")
 context ="\n".join([chunks[i] for i in top_indices])
 answer = ask_question(context , query_text)
 print(answer)
