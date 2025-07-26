@@ -1,9 +1,5 @@
-import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from collections import Counter, defaultdict
-
-nltk.download('punkt')
-nltk.download('stopwords')
 
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
