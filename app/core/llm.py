@@ -1,16 +1,30 @@
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
-tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-base")
-model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv("TOGETHER_API_KEY"),
+    base_url="https://api.together.xyz/v1" 
+)
 
 def ask_question(context: str, query: str) -> str:
-    prompt = f"""
-    Answer as if you are jarvis to Ironman , do not give single worded answers
-    Context: {context}
-    Question: {query}
-    Answer:
-    """
-    inputs = tokenizer(prompt, return_tensors="pt")
-    outputs = model.generate(**inputs, max_length=100)
-    answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return answer
+    system_prompt = (
+        "You are Jarvis, Ironman's intelligent AI assistant. "
+        "Give helpful, multi-sentence responses with friendly tone."
+    )
+
+    user_prompt = f"Context:\n{context}\n\nQuestion:\n{query}"
+
+    response = client.chat.completions.create(
+        model="mistralai/Mixtral-8x7B-Instruct-v0.1",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=0.7,
+        max_tokens=300
+    )
+
+    return response.choices[0].message.content.strip()
